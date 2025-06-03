@@ -4,6 +4,31 @@ Este é um projeto Spring Boot desenvolvido para gerenciar a geração de notas 
 
 O desafio tem como objetivo avaliar as minhas habilidade para um processo seletivo.
 
+## 📐 Arquitetura do Sistema
+
+O diagrama abaixo representa a arquitetura do sistema, incluindo os componentes principais e suas interações:
+
+![Arquitetura do Sistema](itau_nf.drawio)
+
+### Componentes Principais
+
+1. **Entrypoint**
+   - GeradorNFResource: Endpoint REST para geração de notas fiscais
+   - Validação de entrada e transformação de dados
+
+2. **Core**
+   - GeradorNotaFiscalUseCase: Lógica de negócio principal
+   - Estratégias de processamento de notas fiscais
+   - Cálculos de tributos
+
+3. **Dataprovider**
+   - Adaptadores para serviços externos
+   - Simulações de integrações
+
+4. **Config**
+   - Configurações da aplicação
+   - Beans e dependências
+
 ## 🚀 Tecnologias Utilizadas
 
 - Java 21

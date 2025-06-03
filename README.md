@@ -22,7 +22,7 @@ O desafio tem como objetivo avaliar as minhas habilidade para um processo seleti
 
 1. Clone o repositório ou descompacte o zip:
 ```bash
-git clone [URL_DO_REPOSITÓRIO]
+git clone geradornotafiscal (Apenas para documentar)
 ```
 
 2. Navegue até o diretório do projeto:
@@ -94,7 +94,7 @@ mvn test
 
 O projeto utiliza uma estratégia de deploy Blue-Green na AWS utilizando ECS Fargate para garantir zero downtime durante as atualizações.
 
-### Infraestrutura AWS
+### Infraestrutura AWS (Caso deseje acesso externo, acrescentar API Gateway)
 
 - **ECS Fargate**: Para execução dos containers
 - **Application Load Balancer (ALB)**: Para roteamento do tráfego
@@ -129,9 +129,6 @@ O projeto utiliza uma estratégia de deploy Blue-Green na AWS utilizando ECS Far
 
 Em caso de problemas, o rollback é realizado revertendo o ALB para o target group anterior:
 
-```bash
-aws elbv2 modify-listener --listener-arn ${LISTENER_ARN} --default-actions Type=forward,TargetGroupArn=${PREVIOUS_TARGET_GROUP_ARN}
-```
 
 ## 📫 Contato
 

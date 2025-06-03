@@ -8,7 +8,7 @@ O desafio tem como objetivo avaliar as minhas habilidade para um processo seleti
 
 O diagrama abaixo representa a arquitetura do sistema, incluindo os componentes principais e suas interações:
 
-![Arquitetura do Sistema](itau_nf.drawio)
+![Arquitetura do Sistema](itau_nf.drawio.svg)
 
 ### Componentes Principais
 

@@ -1,0 +1,208 @@
+openapi: 3.0.0
+info:
+  title: API de Operações
+  description: API para consulta de operações de clientes e contas
+  version: 1.0.0
+  contact:
+    name: Suporte
+    email: suporte@exemplo.com
+
+servers:
+  - url: http://localhost:8080
+    description: Servidor de Desenvolvimento
+  - url: https://api.exemplo.com
+    description: Servidor de Produção
+
+paths:
+  /operacoes/cliente/{id_cliente}:
+    get:
+      summary: Consulta operações por cliente
+      description: Retorna a lista de operações de um cliente específico
+      operationId: getOperacoesByCliente
+      parameters:
+        - name: id_cliente
+          in: path
+          required: true
+          description: ID do cliente
+          schema:
+            type: string
+        - name: data_posicao_calculo
+          in: query
+          required: true
+          description: Data de posição para cálculo
+          schema:
+            type: string
+            format: date
+            example: "2024-03-20"
+        - name: numeros_operacoes
+          in: query
+          required: false
+          description: Número de operações a serem retornadas
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: Operações encontradas com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperacoesResponse'
+        '400':
+          description: Parâmetros inválidos
+        '404':
+          description: Cliente não encontrado
+        '500':
+          description: Erro interno do servidor
+
+  /operacoes/cliente/{id_conta}:
+    get:
+      summary: Consulta operações por conta
+      description: Retorna a lista de operações de uma conta específica
+      operationId: getOperacoesByConta
+      parameters:
+        - name: id_conta
+          in: path
+          required: true
+          description: ID da conta
+          schema:
+            type: string
+        - name: data_posicao_calculo
+          in: query
+          required: true
+          description: Data de posição para cálculo
+          schema:
+            type: string
+            format: date
+            example: "2024-03-20"
+        - name: numeros_operacoes
+          in: query
+          required: false
+          description: Número de operações a serem retornadas
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: Operações encontradas com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperacoesResponse'
+        '400':
+          description: Parâmetros inválidos
+        '404':
+          description: Conta não encontrada
+        '500':
+          description: Erro interno do servidor
+
+  /operacoes/{id_operacao}:
+    get:
+      summary: Consulta operação específica
+      description: Retorna os detalhes de uma operação específica
+      operationId: getOperacaoById
+      parameters:
+        - name: id_operacao
+          in: path
+          required: true
+          description: ID da operação
+          schema:
+            type: string
+        - name: data_posicao_calculo
+          in: query
+          required: true
+          description: Data de posição para cálculo
+          schema:
+            type: string
+            format: date
+            example: "2024-03-20"
+        - name: numeros_operacoes
+          in: query
+          required: false
+          description: Número de operações a serem retornadas
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: Operação encontrada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperacaoResponse'
+        '400':
+          description: Parâmetros inválidos
+        '404':
+          description: Operação não encontrada
+        '500':
+          description: Erro interno do servidor
+
+components:
+  schemas:
+    OperacaoResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID da operação
+        tipo:
+          type: string
+          description: Tipo da operação
+        valor:
+          type: number
+          format: double
+          description: Valor da operação
+        data:
+          type: string
+          format: date-time
+          description: Data da operação
+        status:
+          type: string
+          description: Status da operação
+        cliente:
+          $ref: '#/components/schemas/Cliente'
+        conta:
+          $ref: '#/components/schemas/Conta'
+
+    OperacoesResponse:
+      type: object
+      properties:
+        operacoes:
+          type: array
+          items:
+            $ref: '#/components/schemas/OperacaoResponse'
+        total:
+          type: integer
+          description: Total de operações
+        pagina:
+          type: integer
+          description: Página atual
+        tamanho:
+          type: integer
+          description: Tamanho da página
+
+    Cliente:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID do cliente
+        nome:
+          type: string
+          description: Nome do cliente
+        documento:
+          type: string
+          description: Documento do cliente
+
+    Conta:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID da conta
+        numero:
+          type: string
+          description: Número da conta
+        agencia:
+          type: string
+          description: Agência da conta
